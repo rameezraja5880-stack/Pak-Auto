@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Cars - Pak Auto</title>
+    <meta name="description" content="Pak Auto offers the best selection of used and new cars, vans, bikes, and more.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body data-page="electric-cars">
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="container">
+            <ul class="top-nav-links">
+                <li><a href="index.html" class="active" data-category="All">Home</a></li>
+                <li><a href="#" data-category="Car">Cars</a></li>
+                <li><a href="#" data-category="Van">Vans</a></li>
+                <li><a href="#" data-category="Bike">Bikes</a></li>
+                <li><a href="#" data-category="Motorhome">Motorhomes</a></li>
+                <li><a href="#" data-category="Caravan">Caravans</a></li>
+                <li><a href="#" data-category="Truck">Trucks</a></li>
+                <li><a href="#" data-category="Electric Bike">Electric Bikes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Header / Sub-Navbar -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                    <img src="Screenshot 2026-05-03 065340.png"
+                        style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <h1 style="margin: 0; font-size: 1.8rem; letter-spacing: -0.5px;">Pak Auto<span class="dot"
+                            style="color: var(--primary-color);">.</span></h1>
+                </a>
+            </div>
+            <ul class="sub-nav-links">
+                <li><a href="used-cars.html">Used Cars</a></li>
+                <li><a href="new-cars.html">New Cars</a></li>
+                <li><a href="leasing.html">Leasing</a></li>
+                <li><a href="electric-cars.html">Electric Cars</a></li>
+                <li><a href="index.html#reviews">Reviews</a></li>
+            </ul>
+            <div class="header-actions">
+                <a href="login.html" class="btn btn-outline" id="authBtn" style="padding: 8px 16px; border-radius: 20px; text-decoration: none;">
+                    <i class="fa-solid fa-user"></i> <span id="authBtnText">Login / Sign Up</span>
+                </a>
+                <button class="btn-compare" id="openCompareBtn">
+                    <i class="fa-solid fa-code-compare"></i> Compare (<span id="compareCount">0</span>)
+                </button>
+                <div class="mobile-menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h2>Find Your Next Vehicle</h2>
+            <p>Discover thousands of new and used vehicles from trusted dealers.</p>
+
+            <div class="search-panel">
+                <form id="searchForm" class="search-form">
+                    <div class="form-group">
+                        <label for="searchType"><i class="fa-solid fa-car"></i> Type</label>
+                        <select id="searchType">
+                            <option value="">Any Type</option>
+                            <option value="Car">Car</option>
+                            <option value="Van">Van</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Motorhome">Motorhome</option>
+                            <option value="Caravan">Caravan</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Electric Bike">Electric Bike</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchBrand"><i class="fa-solid fa-tag"></i> Brand</label>
+                        <select id="searchBrand">
+                            <option value="">Any Brand</option>
+                            <!-- Populated by JS -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchPrice"><i class="fa-solid fa-money-bill-wave"></i> Max Price</label>
+                        <select id="searchPrice">
+                            <option value="">Any Price</option>
+                            <option value="10000">$10,000</option>
+                            <option value="20000">$20,000</option>
+                            <option value="30000">$30,000</option>
+                            <option value="50000">$50,000</option>
+                            <option value="100000">$100,000</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i>
+                        Search</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Listings Section -->
+    <section class="listings-section py-large">
+        <div class="container">
+            <div class="section-header">
+                <h3 id="currentCategoryTitle">All Vehicles</h3>
+                <div class="results-count" id="resultsCount">Loading...</div>
+            </div>
+
+            <div class="listings-grid" id="listingsGrid">
+                <!-- Vehicle cards populated by JS -->
+            </div>
+
+            <div class="load-more-container">
+                <button id="loadMoreBtn" class="btn btn-outline">Load More Vehicles <i
+                        class="fa-solid fa-chevron-down"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section py-large bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h3>What Our Customers Say</h3>
+                <p>Trusted by thousands of buyers worldwide</p>
+            </div>
+
+            <div class="reviews-grid" id="reviewsGrid">
+                <!-- Reviews populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <img src="logo.png" alt="Pak Auto Logo"
+                            style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-color);">
+                        <h2 style="margin: 0; color: white;">Pak Auto<span class="dot"
+                                style="color: var(--primary-color);">.</span></h2>
+                    </div>
+                    <p>The premium destination for finding your next vehicle. We connect buyers with quality sellers.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Vehicles</h4>
+                    <ul>
+                        <li><a href="used-cars.html">Used Cars</a></li>
+                        <li><a href="new-cars.html">New Cars</a></li>
+                        <li><a href="index.html">Vans & Commercial</a></li>
+                        <li><a href="electric-cars.html">Electric Vehicles</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fa-solid fa-location-dot"></i> 123 Auto Street, Motor City</li>
+                        <li><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fa-solid fa-envelope"></i> info@pakauto.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Pak Auto. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Compare Modal -->
+    <div class="modal" id="compareModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeCompareBtn">&times;</span>
+            <h2>Compare Vehicles</h2>
+            <div class="compare-grid" id="compareGrid">
+                <!-- Compared vehicles will go here -->
+                <p class="empty-state">Select up to 2 vehicles to compare.</p>
+            </div>
+            <button class="btn btn-outline btn-block mt-4" id="clearCompareBtn">Clear All</button>
+        </div>
+    </div>
+
+    <!-- Vehicle Gallery Modal -->
+    <div class="modal gallery-modal" id="vehicleGalleryModal">
+        <div class="modal-content gallery-modal-content">
+            <span class="close-modal" id="closeGalleryBtn">&times;</span>
+            <div class="gallery-layout">
+                <div class="main-image-container">
+                    <button class="gallery-control prev-control" id="galleryPrevBtn"><i
+                            class="fa-solid fa-chevron-left"></i></button>
+                    <img id="galleryMainImage" src="" alt="Vehicle Main Image"
+                        onerror="this.src='https://via.placeholder.com/600x400/eeeeee/333333?text=Image+Unavailable'">
+                    <button class="gallery-control next-control" id="galleryNextBtn"><i
+                            class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="thumbnail-track-container">
+                    <div class="thumbnail-track" id="galleryThumbnails">
+                        <!-- Thumbnails populated by JS -->
+                    </div>
+                </div>
+                <div class="gallery-info" style="padding: 20px; text-align: left;">
+                    <h3 id="galleryVehicleTitle" style="margin-bottom: 5px;">Vehicle Title</h3>
+                    <div class="gallery-price" id="galleryVehiclePrice"
+                        style="font-size: 1.5rem; color: var(--primary-color); font-weight: bold; margin-bottom: 15px;">
+                    </div>
+
+                    <div class="gallery-specs"
+                        style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 0.9rem; color: #aaa;">
+                        <div><i class="fa-solid fa-gauge-high"></i> <span id="galleryMileage">0</span> mi</div>
+                        <div><i class="fa-solid fa-gas-pump"></i> <span id="galleryFuel">Petrol</span></div>
+                        <div><i class="fa-solid fa-calendar"></i> <span id="galleryYear">2020</span></div>
+                        <div><i class="fa-solid fa-gear"></i> <span id="galleryEngine">Manual</span></div>
+                    </div>
+
+                    <p id="galleryDescription"
+                        style="font-size: 0.9rem; line-height: 1.4; margin-bottom: 20px; color: #ccc;">Description goes
+                        here.</p>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <button class="btn btn-outline"
+                            style="flex: 1; padding: 10px; border: 1px solid var(--primary-color); background: transparent; color: var(--primary-color); border-radius: 4px; cursor: pointer;"
+                            onclick="requireAuth('Wishlist')"><i class="fa-solid fa-bookmark"></i> Wishlist</button>
+                        <button class="btn btn-outline"
+                            style="flex: 1; padding: 10px; border: 1px solid var(--primary-color); background: transparent; color: var(--primary-color); border-radius: 4px; cursor: pointer;"
+                            onclick="requireAuth('Home Delivery')"><i class="fa-solid fa-truck"></i> Delivery</button>
+                    </div>
+                    <button class="btn btn-primary"
+                        style="width: 100%; padding: 12px; font-size: 1.1rem; font-weight: bold;"
+                        onclick="requireAuth('Reserve Car')"><i class="fa-solid fa-calendar-check"></i> Reserve
+                        Car</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

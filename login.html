@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pak Auto</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-main) 0%, #eef2f3 100%);
+        }
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--hover-shadow);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+        .login-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+        .login-logo h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: var(--dark-color);
+            letter-spacing: -0.5px;
+        }
+        .form-group-login {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group-login label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+        .form-group-login input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group-login input:focus {
+            border-color: var(--primary-color);
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-card">
+            <a href="index.html" class="login-logo">
+                <!-- Fallback to logo.png in case the specific file name varies -->
+                <img src="Screenshot 2026-05-03 065340.png" alt="Pak Auto Logo" onerror="this.src='logo.png'">
+                <h1>Pak Auto<span class="dot" style="color: var(--primary-color);">.</span></h1>
+            </a>
+            <h2 style="margin-bottom: 10px; font-weight: 600; color: var(--dark-color);">Welcome Back</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem;">Please enter your details to sign in.</p>
+            
+            <form id="loginForm">
+                <div class="form-group-login">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group-login">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-login">Sign In</button>
+            </form>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--text-muted);">
+                Don't have an account? <a id="signupLink" href="signup.html" style="color: var(--primary-color); font-weight: 600;">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Pass redirect param to signup link
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectUrl = urlParams.get('redirect');
+        
+        if (redirectUrl) {
+            const signupLink = document.getElementById('signupLink');
+            signupLink.href = 'signup.html?redirect=' + encodeURIComponent(redirectUrl);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Set login state
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Navigate
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
